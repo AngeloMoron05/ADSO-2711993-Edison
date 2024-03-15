@@ -1,7 +1,7 @@
 import 'dart:io';
 
 void main(){
-  Map<int, String> months = {
+  Map<int, String> meses = {
     1: 'enero',
     2: 'febrero',
     3: 'marzo',
@@ -17,16 +17,17 @@ void main(){
   };
 
   print('Ingrese la fecha en formato dd/mm/aaaa:');
-  String fechaInput = stdin.readLineSync()!;
+  String fechaIngresada = stdin.readLineSync()!;
   
-  List<String> partesFecha = fechaInput.split('/');
-  int day = int.parse(partesFecha[0]);
-  int month = int.parse(partesFecha[1]);
+  List<String> partesFecha = fechaIngresada.split('/');
+  print(partesFecha);
+  int dia = int.parse(partesFecha[0]);
+  int mes = int.parse(partesFecha[1]);
   int year = int.parse(partesFecha[2]);
 
-  months.forEach((n,m){
-      if(n==month){
-          print('$day de $m de $year');
-      }
+  meses.forEach((n,m){
+    if(n==mes){
+      print('$dia de $m de $year');
+    }
   });
 }
