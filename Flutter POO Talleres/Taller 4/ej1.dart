@@ -1,7 +1,18 @@
 import 'dart:io';
 
 void main() {
+  Profesor edison = new Profesor('1001', 'edison', '30', 'M', 100, 9, 'Estructura de datos');
+  List<Aprendices> aprendices = [];
+  aprendices.add(new Aprendices('1002', 'angelo', '18','H', 200, 3, 8));
+  aprendices.add(new Aprendices('1003', 'alex', '20','H', 200, 23, 6));
+  aprendices.add(new Aprendices('1004', 'esteban', '19','H', 200, 31, 4));
+  aprendices.add(new Aprendices('1005', 'yefry', '26','H', 200, 12, 7));
+  aprendices.add(new Aprendices('1006', 'daniela', '18','M', 200, 5, 6));
+  aprendices.add(new Aprendices('1007', 'paula', '19','M', 200, 7, 1));
+  Aula salon = new Aula('101', 6, 'Estructura de datos', '1ro', 'Comercios y Servicios');
 
+  Clase viernes = new Clase(salon, aprendices, edison);
+  viernes.confirmacionClase();
 }
 
 class Persona{
@@ -16,6 +27,10 @@ class Persona{
 
   String showPersona() {
     return "Persona: $cedula, $nombre, $edad, $sexo";
+  }
+
+  String showDatosBasicos() {
+    return "$cedula, $nombre";
   }
 }
 
@@ -68,24 +83,24 @@ class Clase{
 
   void confirmacionClase(){
     if(aulaClase.getAsignatura()==profeClase.getMateriaAsignada()){
-      if(aprendicesClase.length>=(aulaClase.getCapacidadEstudiantes())*60/100){
+      if(aprendicesClase.length>=(aulaClase.getCapacidadEstudiantes()*60/100)){
       print("La clase se puede realizar.");
+      List<Aprendices> aprendicesMujeres = [];
+      List<Aprendices> aprendicesHombres = [];
       aprendicesClase.forEach((x) {
-        List<Aprendices> aprendicesMujeres = [];
-        List<Aprendices> aprendicesHombres = [];
         if(x.getSexo()=="M" && x.getCalificacion()>=5){
           aprendicesMujeres.add(x);
         }else if(x.getSexo()=="H" && x.getCalificacion()>=5){
           aprendicesHombres.add(x);
         }
-        print("\tAPRENDICES HOMBRES APROBADOS");
-        print(aprendicesHombres);
-        print("\tAPRENDICES MUJERES APROBADAS");
-        print(aprendicesMujeres);
       });
-    }else{
-      print("El numero de aprendices no supera el minimo requerido, NO se puede llevar a cabo la clase.");
-    }
+      print("\tAPRENDICES HOMBRES APROBADOS");
+      aprendicesHombres.forEach((x) => print(x.showDatosBasicos()));
+      print("\tAPRENDICES MUJERES APROBADAS");
+      aprendicesMujeres.forEach((x) => print(x.showDatosBasicos()));
+      }else{
+        print("El numero de aprendices no supera el minimo requerido, NO se puede llevar a cabo la clase.");
+      }
     }else{
       print("La clase no se puede realizar, el profesor aignado al aula no corresponde a la materia.");
     }
